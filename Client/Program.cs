@@ -18,17 +18,18 @@ namespace Client
             
             ShowInfo("Соединение с сервером успешно установлено");
 
-            var message = "Проверка связи...";
-            var bufferSend = Encoding.Unicode.GetBytes(message);
+            var message = new StringBuilder();
+            message.Append("Проверка связи...");
+            var bufferSend = Encoding.Unicode.GetBytes(message.ToString());
             connection.Send(bufferSend);
             ShowInfo("Сообщение серверу отправлено");
             
-            message = String.Empty;
-            byte[] buffer = new byte[256];
+            message.Clear();
+            var buffer = new byte[256];
             do
             {
                 var bytes = connection.Receive(buffer);
-                message += Encoding.Unicode.GetString(buffer, 0, bytes);
+                message.Append(Encoding.Unicode.GetString(buffer, 0, bytes));
             } while (connection.Available > 0);
                 
             ShowMessage($"Сообщение от сервера - {message}");

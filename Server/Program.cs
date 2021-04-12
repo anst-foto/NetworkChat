@@ -26,19 +26,19 @@ namespace Server
                 var client = listenSocket.Accept();
                 ShowInfo("Клиент подключился");
 
-                string message = "";
-                byte[] buffer = new byte[256];
+                var message = new StringBuilder();
+                var buffer = new byte[256];
                 do
                 {
                     var bytes = client.Receive(buffer);
-                    message += Encoding.Unicode.GetString(buffer, 0, bytes);
+                    message.Append(Encoding.Unicode.GetString(buffer, 0, bytes));
                 } while (client.Available > 0);
                 
                 ShowMessage($"Сообщение от клиента - {message}");
                 
-                message = String.Empty;
-                message = "Сообщение получено";
-                byte[] bufferSend = Encoding.Unicode.GetBytes(message);
+                message.Clear();
+                message.Append("Сообщение получено");
+                var bufferSend = Encoding.Unicode.GetBytes(message.ToString());
                 client.Send(bufferSend);
                 ShowInfo("Сообщение клиенту отправлено");
 
