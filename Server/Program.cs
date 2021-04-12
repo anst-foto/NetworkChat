@@ -41,7 +41,7 @@ namespace Server
                 byte[] bufferSend = Encoding.Unicode.GetBytes(message);
                 client.Send(bufferSend);
                 ShowInfo("Сообщение клиенту отправлено");
-                
+
                 client.Shutdown(SocketShutdown.Both);
                 client.Close();
                 
