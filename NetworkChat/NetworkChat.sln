@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{0F77F171-EC10-41F0-BFC4-9F7DD3C537EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{4CF8BADD-378E-420E-BEF7-608318B07935}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TCPLibrary", "TCPLibrary\TCPLibrary.csproj", "{CA1BFB8D-288F-480B-AA17-A80C10C8BA37}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F77F171-EC10-41F0-BFC4-9F7DD3C537EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F77F171-EC10-41F0-BFC4-9F7DD3C537EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F77F171-EC10-41F0-BFC4-9F7DD3C537EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F77F171-EC10-41F0-BFC4-9F7DD3C537EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CF8BADD-378E-420E-BEF7-608318B07935}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CF8BADD-378E-420E-BEF7-608318B07935}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CF8BADD-378E-420E-BEF7-608318B07935}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CF8BADD-378E-420E-BEF7-608318B07935}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA1BFB8D-288F-480B-AA17-A80C10C8BA37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA1BFB8D-288F-480B-AA17-A80C10C8BA37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA1BFB8D-288F-480B-AA17-A80C10C8BA37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA1BFB8D-288F-480B-AA17-A80C10C8BA37}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
