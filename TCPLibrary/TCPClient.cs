@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using System;
+using System.Net.Sockets;
 
 namespace TCPLibrary
 {
@@ -12,7 +13,27 @@ namespace TCPLibrary
 
         public void Connect()
         {
-            _socket.Connect(_ipEndPoint);
+            try
+            {
+                _socket.Connect(_ipEndPoint);
+            }
+            catch (ArgumentNullException)
+            {
+                throw new Exception("Пустой аргумент при подключении к серверу");
+            }
+            catch (SocketException)
+            {
+                throw new Exception("Произошла ошибка при попытке доступа к сокету");
+            }
+            catch (ObjectDisposedException)
+            {
+                throw new Exception("Сокет закрыт");
+            }
+            catch (InvalidOperationException)
+            {
+                throw new Exception("Сокет был переведен в состояние прослушивания с помощью вызова Listen");
+            }
+
         }
     }
 }

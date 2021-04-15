@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Buffers;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -100,7 +99,7 @@ namespace TCPLibrary
             }
             catch (SocketException)
             {
-                throw new Exception("Произошлп ошибка при попытке досткпа к сокету.");
+                throw new Exception("Произошла ошибка при попытке доступа к сокету");
             }
             
         }
