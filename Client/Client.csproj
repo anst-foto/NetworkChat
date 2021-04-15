@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Commands\Commands.csproj" />
       <ProjectReference Include="..\Messages\Messages.csproj" />
       <ProjectReference Include="..\TCPLibrary\TCPLibrary.csproj" />
     </ItemGroup>

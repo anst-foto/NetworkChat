@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
+using Commands;
 using Messages;
 using TCPLibrary;
 
@@ -34,23 +36,32 @@ namespace Server
        static void NewClientTask(TCP client)
        {
            ConsoleMessage.ShowLog("Запущен отдельный поток для нового подключения");
+           var json = client.ReceiveMessage();
+           var name = JsonSerializer.Deserialize<ChatMessageType>(json);
+           string clientName;
+           clientName = name.Type == TypeMessage.Welcome ? name.Message : "Unknown";
 
            while (true)
            {
                var messageReceive = client.ReceiveMessage();
-               ConsoleMessage.ShowInfo($"Сообщение от клиента: {messageReceive}");
-
-               if (messageReceive == @"\stop")
+               var receive = JsonSerializer.Deserialize<ChatMessageType>(messageReceive);
+               if (receive.Type == TypeMessage.Stop)
                {
-                   ConsoleMessage.ShowLog("Клиент отключается");
+                   ConsoleMessage.ShowLog($"Клиент {clientName} отключается");
                    break;
                }
-               
-               client.SendMessage("Ваше сообщение получено");
-               ConsoleMessage.ShowLog("Клиенту отправлено подтвеждение получения сообщения");
+               else
+               {
+                   ConsoleMessage.ShowInfo($"Сообщение от {clientName}: {receive.Message}");
+               }
+              
+               var message = new ChatMessageType(TypeMessage.Message, $"[{clientName}] Ваше сообщение получено");
+               var send = JsonSerializer.Serialize(message);
+               client.SendMessage(send);
+               ConsoleMessage.ShowLog($"{clientName} отправлено подтвеждение получения сообщения");
            }
            client.Close();
-           ConsoleMessage.ShowLog("Завершается отдельный поток для клиента");
+           ConsoleMessage.ShowLog($"Завершается отдельный поток для клиента - {clientName}");
        }
     }
 }
