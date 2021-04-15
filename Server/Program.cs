@@ -1,9 +1,12 @@
-﻿namespace Server
+﻿using System;
+
+namespace Server
 {
-    class Program
+   class Program
     {
-        static void Main()
+       static void Main()
         {
+            
         }
     }
 }
