@@ -37,14 +37,14 @@ namespace Server
        {
            ConsoleMessage.ShowLog("Запущен отдельный поток для нового подключения");
            var json = client.ReceiveMessage();
-           var name = JsonSerializer.Deserialize<ChatMessageType>(json);
+           var name = new ChatMessageType(json);
            string clientName;
            clientName = name.Type == TypeMessage.Welcome ? name.Message : "Unknown";
 
            while (true)
            {
                var messageReceive = client.ReceiveMessage();
-               var receive = JsonSerializer.Deserialize<ChatMessageType>(messageReceive);
+               var receive = new ChatMessageType(messageReceive);
                if (receive.Type == TypeMessage.Stop)
                {
                    ConsoleMessage.ShowLog($"Клиент {clientName} отключается");
@@ -55,8 +55,7 @@ namespace Server
                    ConsoleMessage.ShowInfo($"Сообщение от {clientName}: {receive.Message}");
                }
               
-               var message = new ChatMessageType(TypeMessage.Message, $"[{clientName}] Ваше сообщение получено");
-               var send = JsonSerializer.Serialize(message);
+               var send = ChatMessageType.CreateMessage($"[{clientName}] Ваше сообщение получено");
                client.SendMessage(send);
                ConsoleMessage.ShowLog($"{clientName} отправлено подтвеждение получения сообщения");
            }

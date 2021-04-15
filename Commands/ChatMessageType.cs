@@ -1,4 +1,6 @@
-﻿namespace Commands
+﻿using System.Text.Json;
+
+namespace Commands
 {
     public class ChatMessageType
     {
@@ -11,6 +13,35 @@
         {
             Type = type;
             Message = message;
+        }
+
+        public ChatMessageType(string json)
+        {
+            var temp = JsonSerializer.Deserialize<ChatMessageType>(json);
+            Type = temp.Type;
+            Message = temp.Message;
+        }
+
+        private static string Create(TypeMessage type, string message)
+        {
+            var temp = new ChatMessageType(type, message);
+            var res = JsonSerializer.Serialize(temp);
+            return res;
+        }
+
+        public static string CreateWelcome(string name)
+        {
+            return Create(TypeMessage.Welcome, name);
+        }
+
+        public static string CreateStop()
+        {
+            return Create(TypeMessage.Stop, "");
+        }
+
+        public static string CreateMessage(string message)
+        {
+            return Create(TypeMessage.Message, message);
         }
     }
 }

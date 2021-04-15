@@ -21,8 +21,7 @@ namespace Client
                 
                 Console.Write("Введите ваше имя: ");
                 var name = Console.ReadLine();
-                var messageName = new ChatMessageType(TypeMessage.Welcome, name);
-                var sendName = JsonSerializer.Serialize(messageName);
+                var sendName = ChatMessageType.CreateWelcome(name);
                 client.SendMessage(sendName);
                 
                 while (true)
@@ -31,22 +30,20 @@ namespace Client
                     var sendMessage = Console.ReadLine();
                     if (sendMessage == @"\stop")
                     {
-                        var message = new ChatMessageType(TypeMessage.Stop, sendMessage);
-                        var send = JsonSerializer.Serialize(message);
+                        var send = ChatMessageType.CreateStop();
                         client.SendMessage(send);
                         ConsoleMessage.ShowLog("Клиент отключается от сервера");
                         break;
                     }
                     else
                     {
-                        var message = new ChatMessageType(TypeMessage.Message, sendMessage);
-                        var send = JsonSerializer.Serialize(message);
+                        var send = ChatMessageType.CreateMessage(sendMessage);
                         client.SendMessage(send);
                         ConsoleMessage.ShowLog("Сообщение серверу отправлено");
                     }
 
                     var receiveMessage = client.ReceiveMessage();
-                    var receive = JsonSerializer.Deserialize<ChatMessageType>(receiveMessage);
+                    var receive = new ChatMessageType(receiveMessage);
                     ConsoleMessage.ShowInfo($"Ответ от сервера: {receive.Message}");
                 }
             
